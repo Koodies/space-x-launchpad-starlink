@@ -46,12 +46,12 @@ function getStarlink(year = 0, month = 0, day = 0) {
     if (!starlinks) throw new Error("still loading data");
     if (month === 0) {
       data = { ...starlinks[year] };
-    } else if (month === 0) {
+    } else if (day === 0) {
       data = { ...starlinks[year][Month[month]] };
     } else {
       data = { ...starlinks[year][Month[month]][day] };
     }
-    if (data === {}) throw new Error("not found");
+    if (Object.entries(data).length === 0) throw new Error("not found");
     return { status: "success", data };
   } catch (error) {
     //log error
