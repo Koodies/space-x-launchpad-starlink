@@ -1,20 +1,25 @@
 const { get, post } = require("../lib/fetch");
 
 async function getFailedLaunches(launchpadID) {
-  const launchpad = await getLaunchPadName(launchpadID);
-  const datas = await getLaunchDocs(launchpadID);
-  let all_failures = [];
-  datas.forEach((data) => {
-    const failures = data["failures"].map((failure) => failure.reason);
-    all_failures.push({
-      name: data["name"],
-      failures,
+  try {
+    const launchpad = await getLaunchPadName(launchpadID);
+    const datas = await getLaunchDocs(launchpadID);
+    let all_failures = [];
+    datas.forEach((data) => {
+      const failures = data["failures"].map((failure) => failure.reason);
+      all_failures.push({
+        name: data["name"],
+        failures,
+      });
     });
-  });
-  return {
-    launchpad,
-    all_failures,
-  };
+    return {
+      launchpad,
+      all_failures,
+    };
+  } catch (error) {
+    //log error
+    return {}
+  }
 }
 
 async function getLaunchPadName(launchpadID) {
