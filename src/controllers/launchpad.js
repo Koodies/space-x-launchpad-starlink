@@ -1,30 +1,28 @@
-const fetch = require("node-fetch");
+const { get, post } = require("../lib/fetch");
 
-module.exports = {
-  async getFailedLaunches(launchpadID) {
-    const launchpad = await getLaunchPadName(launchpadID);
-    const datas = await getLaunchDocs(launchpadID);
-    let all_failures = [];
-    datas.forEach((data) => {
-      const failures = data["failures"].map((failure) => failure.reason);
-      all_failures.push({
-        name: data["name"],
-        failures,
-      });
+async function getFailedLaunches(launchpadID) {
+  const launchpad = await getLaunchPadName(launchpadID);
+  const datas = await getLaunchDocs(launchpadID);
+  let all_failures = [];
+  datas.forEach((data) => {
+    const failures = data["failures"].map((failure) => failure.reason);
+    all_failures.push({
+      name: data["name"],
+      failures,
     });
-    return {
-      launchpad,
-      all_failures,
-    };
-  },
-};
+  });
+  return {
+    launchpad,
+    all_failures,
+  };
+}
 
 async function getLaunchPadName(launchpadID) {
-  const response = await fetch(
+  const response = await get(
     `https://api.spacexdata.com/v4/launchpads/${launchpadID}`
   );
-  const data = await response.json();
-  return data.name;
+  if (response.status !== 200) return null;
+  return response.data.name;
 }
 
 async function getLaunchDocs(launchpadID) {
@@ -36,12 +34,16 @@ async function getLaunchDocs(launchpadID) {
     sort: {
       _id: "desc",
     },
+
   };
-  const response = await fetch("https://api.spacexdata.com/v4/launches/query", {
-    method: "post",
-    body: JSON.stringify({ query, options }),
-    headers: { "Content-Type": "application/json" },
+  const response = await post("https://api.spacexdata.com/v4/launches/query", {
+    query,
+    options,
   });
-  const data = await response.json();
-  return data.docs;
+  if (response.status !== 200) return [];
+  return response.data.docs;
 }
+
+module.exports = {
+  getFailedLaunches
+};
