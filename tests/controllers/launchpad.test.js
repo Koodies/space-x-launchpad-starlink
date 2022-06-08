@@ -30,7 +30,7 @@ describe("Get all information about failed launches", () => {
 
   test("return empty json on unexist launchID", async () => {
     const launchID = "xxxxxxxxxxxxxxxxxx";
-    const expectedResponse = {};
+    const expectedResponse = {launchpad: null, all_failures: []};
     const result = await getFailedLaunches(launchID);
     expect(result).toStrictEqual(expectedResponse);
   });
