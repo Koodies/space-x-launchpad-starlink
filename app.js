@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const {getAllStarlinks} = require("./src/controllers/starlink")
 
 const launchRouter = require("./routes/launchpad");
 const starlinkRouter = require("./routes/starlink");
@@ -16,5 +17,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/launchpad", launchRouter);
 app.use("/starlink", starlinkRouter);
+
+getAllStarlinks()
 
 module.exports = app;
