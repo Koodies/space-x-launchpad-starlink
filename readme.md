@@ -1,4 +1,20 @@
+- [Environment](#environment)
+- [Installation](#installation)
+- [Function 1](#function-1)
+- [Function 2](#function-2)
+  - [Testing the functions](#testing-the-functions)
 
+# Environment 
+
+- NodeJS minimum v12.13.0
+
+# Installation
+
+1. Install [nodejs](https://nodejs.org/en/) using a [nvm](https://github.com/nvm-sh/nvm)
+2. Git clone the [master branch](https://github.com/Koodies/space-x-launchpad-starlink)
+3. Run npm install on the cloned directory
+4. Run npm start to start the app
+5. Access the app using [http://localhost:3000/](http://localhost:3000/)
 
 # Function 1
 
@@ -48,3 +64,27 @@ Make it as convenient as possible to look up following values from the return va
 - starlinks launched in year 2019
 - starlinks launched on May 5th 2019
 - starlinks launched in June 2020
+
+## Testing the functions
+
+`{id}` specifies the id of an existing launchpad and `Payload` shows the parameter that is going to be send back as response.
+
+GET `/launchpad/{id}` - Get a existing user information
+
+Payload
+|Name|Type|Description|
+| ------------- | ------ | ------------- |
+|launchpad|string|Launchpad Name|
+|all_failures|array|Array of object with launch name and fail reason|
+
+---
+
+GET `/starlink?year={year}&month={month}&day={day}` - Get a existing user information
+
+Payload
+|Name|Type|Description|
+| ------------- | ------ | ------------- |
+|status|string|Success or Error|
+|data|Array|Array of starlink objects|
+
+---
