@@ -44,7 +44,9 @@ function getStarlink(year = 0, month = 0, day = 0) {
   try {
     let data = {};
     if (!starlinks) throw new Error("still loading data");
-    if (month === 0) {
+    if (year === 0) {
+      data = { ...starlinks };
+    } else if (month === 0) {
       data = { ...starlinks[year] };
     } else if (day === 0) {
       data = { ...starlinks[year][Month[month]] };
