@@ -23,7 +23,7 @@
             "get": {
                 "summary": "Get all failed launches by launchpad",
                 "description": "Get all failed launches reasons in an array by launchpad id",
-                "operationId": "uploadFile",
+                "operationId": "launchpad",
                 "produces": [
                     "application/json"
                 ],
@@ -51,7 +51,7 @@
             "get": {
                 "summary": "Get starlinks launches by year month & day",
                 "description": "",
-                "operationId": "addPet",
+                "operationId": "starlink",
                 "produces": [
                     "application/json"
                 ],
