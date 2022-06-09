@@ -8,6 +8,8 @@ const launchRouter = require("./routes/launchpad");
 const starlinkRouter = require("./routes/starlink");
 
 const app = express();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -17,6 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/launchpad", launchRouter);
 app.use("/starlink", starlinkRouter);
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 getAllStarlinks()
 

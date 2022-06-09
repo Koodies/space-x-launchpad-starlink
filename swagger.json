@@ -1,0 +1,135 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "",
+        "version": "1.0.0",
+        "title": "Space-X",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "apiteam@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/launchpad/{id}": {
+            "get": {
+                "summary": "Get all failed launches by launchpad",
+                "description": "Get all failed launches reasons in an array by launchpad id",
+                "operationId": "uploadFile",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of launchpad",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/launchpadResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/starlink": {
+            "get": {
+                "summary": "Get starlinks launches by year month & day",
+                "description": "",
+                "operationId": "addPet",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Year of starlink launches",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "month",
+                        "in": "query",
+                        "description": "Month of starlink launches",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "day",
+                        "in": "query",
+                        "description": "Day of starlink launches",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/starlinkResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "launchpadResponse": {
+            "type": "object",
+            "properties": {
+                "launchpad": {
+                    "type": "string",
+                    "format": "string"
+                },
+                "all_failures": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "starlinkResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "description": "response status",
+                    "enum": [
+                        "success",
+                        "error"
+                    ]
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}
