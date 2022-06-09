@@ -52,4 +52,19 @@ describe("Get all information about starlink", () => {
     const result = getStarlink(-2020);
     expect(result.status).toBe("error");
   });
+
+  test("return error on searching for starlinks launched with a NAN year", () => {
+    const result = getStarlink(NaN);
+    expect(result.status).toBe("error");
+  });
+
+  test("return error on searching for starlinks launched with a NAN month", () => {
+    const result = getStarlink(2020, NaN);
+    expect(result.status).toBe("error");
+  });
+
+  test("return error on searching for starlinks launched with a NAN day", () => {
+    const result = getStarlink(2020, 6, parseInt("test"));
+    expect(result.status).toBe("error");
+  });
 });

@@ -1,10 +1,13 @@
 var express = require("express");
 var router = express.Router();
-const {getStarlink} = require("../src/controllers/starlink")
+const { getStarlink } = require("../src/controllers/starlink");
 
 router.get("/", function (req, res, next) {
-    const data = getStarlink(req.query.year, req.query.month, req.query.day)
-    res.json(data)
+  const year = req.query.year ? parseInt(req.query.year) : 0;
+  const month = req.query.month ? parseInt(req.query.month) : 0;
+  const day = req.query.day ? parseInt(req.query.day) : 0;
+  const data = getStarlink(year, month, day);
+  res.json(data);
 });
 
 module.exports = router;
