@@ -69,7 +69,7 @@ Make it as convenient as possible to look up following values from the return va
 
 `{id}` specifies the id of an existing launchpad and `Payload` shows the parameter that is going to be send back as response.
 
-GET `/launchpad/{id}` - Get a existing user information
+GET `/launchpad/{id}` - Get a existing launchpad information
 
 Payload
 |Name|Type|Description|
@@ -79,7 +79,7 @@ Payload
 
 ---
 
-GET `/starlink?year={year}&month={month}&day={day}` - Get a existing user information
+GET `/starlink?year={year}&month={month}&day={day}` - Get a existing starlink information
 
 Payload
 |Name|Type|Description|
